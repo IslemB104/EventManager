@@ -1,0 +1,61 @@
+<div class="action-card" >
+    <h2>Action List</h2>
+    <div >
+
+      <table class="action-table">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Objectif</th>
+              <th>Responsable</th>
+              <th>Personnes touchées</th>
+              <th>Date de création</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let action of getFilteredActions(); let i = index" [ngClass]="{'success': action.success}">
+              <td>{{ action.name }}</td>
+              <td>{{ action.objective }}</td>
+              <td>{{ action.responsible }}</td>
+              <td>{{ action.beneficiaries }}</td>
+              <td>{{ action.creationDate | date:'short' }}</td>
+              <td *ngIf="!action.isModifying">
+                <div class="action-buttons">
+                  <button (click)="markAsSuccess(i)" class="mark-success">Marquer comme réussie</button>
+                  <button (click)="startModify(i)" class="modify">Modifier</button>
+                  <button (click)="removeAction(i)" class="delete">Supprimer</button>
+                </div>
+              </td>
+              <td *ngIf="action.isModifying" colspan="5">
+                <!-- Modification form -->
+                <div class="custom-form">
+                <form>
+                  <!-- Modify the form according to your needs -->
+                  <!-- Use ngModel or formControl to bind the input values -->
+                  <div class="form-group">
+                  <input type="text" [(ngModel)]="action.name" name="name" />
+                  </div>
+                  <div class="form-group">
+                  <input type="text" [(ngModel)]="action.objective" name="objective" />
+                  </div>
+                  <div class="form-group">
+                  <input type="text" [(ngModel)]="action.responsible" name="responsible" />
+                  </div>
+                  <div class="form-group">
+                  <input type="number" [(ngModel)]="action.beneficiaries" name="beneficiaries" />
+                  <input type="date" [(ngModel)]="action.creationDate" name="creationDate" />
+                  </div>
+                  <!-- Other input fields -->
+                  <div class="action-buttons">
+                  <button type="button" class="modify" (click)="saveChanges(i)">Enregistrer</button>
+                  </div>
+                </form>
+              </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+</div>
+  

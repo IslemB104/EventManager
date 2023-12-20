@@ -1,10 +1,12 @@
-:host {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 14px;
-    color: #333;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+<style>
+    :host {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      font-size: 14px;
+      color: #333;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
   
     h1,
     h2,
@@ -34,7 +36,10 @@
       background-color: #4c4caf;
       color: white;
       font-weight: 600;
-    }
+      }
+  
+   
+    
   
     .content {
       display: flex;
@@ -156,7 +161,7 @@
     }
   
     .terminal pre {
-      font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+      font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
       color: white;
       padding: 0 1rem 1rem;
       margin: 0;
@@ -193,5 +198,34 @@
       display: flex;
       align-items: center;
     }
-  }
   
+  </style>
+
+<app-header></app-header>
+
+<div class="content" role="main"> </div>
+
+<table>
+    <tr>
+        <td style="width: 600px; padding-left: 120px;" >
+            <app-actions></app-actions>
+        </td>
+        <td>
+            <img src="..\assets\20944565.jpg" >
+        </td>
+    </tr>
+</table>
+
+<app-action-list [filter]="actionFilter"></app-action-list>
+
+<div>
+    <label for="actionFilter">Filtrer les actions par :</label>
+    <select [(ngModel)]="selectedFilter" (ngModelChange)="updateFilter()">
+      <option value="name">Nom</option>
+      <option value="objective">Objectif</option>
+      <option value="responsible">Responsable</option>
+    </select>
+    <input type="text" id="actionFilter" [(ngModel)]="actionFilter" />
+</div>
+
+<app-footer></app-footer>
